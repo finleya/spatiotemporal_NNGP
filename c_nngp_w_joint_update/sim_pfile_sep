@@ -1,0 +1,46 @@
+##No spaces between comma separated items (or the world will implode)!
+
+n.threads 10
+seed 1
+n.samples 5000
+n.samples.start 4000
+n.report 100
+out.file chain-1
+
+perm 1
+cholmod.stats 1
+print.P&L 0
+
+st.cor.type sep_1
+
+m 15
+n 9261
+p 2
+
+#.file is file name, number of rows, and number of columns
+#coords n x 3
+coords.file ../sim_data/sep/coords,9261,3
+
+X.file ../sim_data/sep/X,9261,2
+y.file ../sim_data/sep/y,9261,1
+
+beta.starting 1,5
+
+tauSq.starting 1
+tauSq.b 0.1
+
+sigmaSq.starting 1
+sigmaSq.b 5
+
+alpha.starting 5
+alpha.a 3
+alpha.b 300
+alpha.tuning 0.1
+
+gamma.starting 5
+gamma.a 3
+gamma.b 300
+gamma.tuning 0.1
+
+nn.indx.file ../sim_data/sep/nn.indx.138795,138795,1
+nn.indx.lu.file ../sim_data/sep/nn.indx.lu.18522,18522,1

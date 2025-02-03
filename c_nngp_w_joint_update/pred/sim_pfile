@@ -1,0 +1,41 @@
+##No spaces between comma separated items (or the world will implode)!
+
+n.threads 20
+seed 1
+n.samples 2000
+n.report 100
+out.file ppd-samps
+
+n 5000
+n0 5000
+p 3
+r 2
+n.domain 5
+m 10
+
+#.file is file name, number of rows, and number of columns
+X0.file ../sim_data/X.0,5000,3
+X0.tilde.file ../sim_data/X.tilde.0,5000,2
+coords0.file ../sim_data/coords.0,5000,2
+coords.file ../sim_data/coords,5000,2
+
+## Note, for estimation V.tilde.file is nx(n.dom*r), but for prediction it is nxr (i.e., just those columns in X.0 that are domain varying). I'm just being lazy and didn't go back and change this in the estimation code.
+
+domain.indx.0.file ../sim_data/dom.indx.0,5000,1
+
+nnIndx.0.file nn.indx.0,5000,10
+
+## FYI, double check how many rows are in a file via wc -l ../pd-samps-beta
+## FYI, double check number of columns in a file via awk -F' ' 'NR==1{print NF}' ../pd-samps-beta
+
+beta.samples.file ../pd-samps-beta,3,2000
+alpha.samples.file ../pd-samps-alpha,10,2000
+w.samples.file ../pd-samps-w,5000,2000
+sigmaSqW.samples.file ../pd-samps-sigmaSqW,1,2000
+phi.samples.file ../pd-samps-phi,1,2000
+tauSq.samples.file ../pd-samps-tauSq,1,2000
+
+z0.samples.file binom/pred/ppd-samps-z0,5000,2000
+
+# This is the fixed process error on z, it should always be very small.
+tauSq.2 0.0000001

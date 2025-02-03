@@ -1,0 +1,50 @@
+##No spaces between comma separated items (or the world will implode)!
+
+n.threads 18
+seed 1
+n.samples 25000
+n.samples.start 22000
+n.report 500
+out.file chain-1
+
+st.cor.type non_sep_1
+
+m 15
+n 9261
+p 2
+
+#.file is file name, number of rows, and number of columns
+#coords n x 2
+coords.file ../sim_data/non_sep/coords,9261,3
+
+X.file ../sim_data/non_sep/X,9261,2
+y.file ../sim_data/non_sep/y,9261,1
+
+beta.starting 1,5
+
+tauSq.starting 1
+tauSq.b 0.1
+
+sigmaSq.starting 1
+sigmaSq.b 5
+
+alpha.starting 5
+alpha.a 1
+alpha.b 10
+alpha.tuning 0.1
+
+gamma.starting 5
+gamma.a 1
+gamma.b 10
+gamma.tuning 0.1
+
+kappa.starting 0.5
+kappa.a 0.25
+kappa.b 0.75
+kappa.tuning 0
+
+nn.indx.file ../sim_data/non_sep/nn.indx.138795,138795,1
+nn.indx.lu.file ../sim_data/non_sep/nn.indx.lu.18522,18522,1
+u.indx.file ../sim_data/non_sep/u.indx.138795,138795,1
+u.indx.lu.file ../sim_data/non_sep/u.indx.lu.18522,18522,1
+ui.indx.file ../sim_data/non_sep/ui.indx.138795,138795,1

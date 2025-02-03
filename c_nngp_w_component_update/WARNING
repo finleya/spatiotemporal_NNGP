@@ -1,0 +1,5 @@
+1/30/25
+
+So this component-wise update of the w's works well for the spatial and seems to work well for the space-time separable models and for some nngp orderings for the non-separable model (e.g., order by the x and z coords).
+
+For the non-separable model, it is very slow to converge. Other orderings seem to never converge, e.g., I can't get convergence using the GpGp maxmin ordering. It is either a bug in my code or the component-wise model is just hopeless for convergence in some settings (i.e., orderings). I'm leaning toward it is slow to converge and there is a bug in my code (but there does not seem to be a bug for the separable model case). I looked at it for a long time and can't find the bug. Good news is the joint update of w code works very well both in speed of convergence and estimation of the covariance parameters. I'll return to this code someday if needed.
