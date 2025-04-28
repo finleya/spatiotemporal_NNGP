@@ -1,0 +1,28 @@
+##No spaces between comma separated items (or the world will implode)!
+
+n.threads 20
+seed 1
+n.samples 2000
+n.report 100
+out.file ppd-samps
+
+n 8335 
+n0 926
+p 2
+m 15
+
+X0.file ../sim_data/X.ho,926,2
+coords0.file ../sim_data/coords.ho,926,3
+coords.file ../sim_data/coords.mod,8335,3
+
+nnIndx.0.file nn.indx.0,926,15
+
+## FYI, double check how many rows are in a file via wc -l ../chain-1-beta
+## FYI, double check number of columns in a file via awk -F' ' 'NR==1{print NF}' ../chain-1-beta
+
+beta.samples.file ../chain-1-beta,2,4000
+sigmaSq.samples.file ../chain-1-sigmaSq,1,4000
+alpha.samples.file ../chain-1-alpha,1,4000
+gamma.samples.file ../chain-1-gamma,1,4000
+kappa.samples.file ../chain-1-kappa,1,4000
+w.samples.file ../chain-1-w,8335,4000

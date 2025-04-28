@@ -1,0 +1,3 @@
+5/28/25
+
+I still need to spend some time with this code, but I'm fairly confident it's running correctly. Unlike the Gaussian response that I typically put a flat prior on beta, this binomial model seems to need a pretty informative prior for beta. Here, I use a N(mu_beta, sigma^2_beta I) centered pretty tightly on the non-spatial model's estimate for beta.
