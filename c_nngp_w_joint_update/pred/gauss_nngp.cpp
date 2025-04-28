@@ -127,9 +127,6 @@ int main(int argc, char **argv){
   int m; par.getVal("m", m);
   int n; par.getVal("n", n);
   int p; par.getVal("p", p);
-  int r; par.getVal("r", r);
-  int q; par.getVal("n.domain", q);
-  int rq = r*q;
   int pp = p*p;
   int mm = m*m;
   
@@ -160,12 +157,18 @@ int main(int argc, char **argv){
   int status = 0;
   double wall_start_0 = get_wall_time();
 
+  int zWIndx = -1;
+  double *wZ = new double[n0*nSamples];
+  for(i = 0; i < n0*nSamples; i++){
+    wZ[i] = rnorm(0.0, 1.0);
+  }
+
   int zYIndx = -1;
   double *yZ = new double[n0*nSamples];
   for(i = 0; i < n0*nSamples; i++){
     yZ[i] = rnorm(0.0, 1.0);
   }
-
+  
   double h, u, d;
 
   int threadID;
@@ -173,10 +176,10 @@ int main(int argc, char **argv){
   cout << "start sampling" << endl;
 
   for(i = 0; i < n0; i++){
-    
+
 #pragma omp parallel for private(threadID, j, k, l, u, h, info)
     for(s = 0; s < nSamples; s++){
-      
+
       threadID = omp_get_thread_num();
       
       for(k = 0; k < m; k++){
@@ -201,8 +204,11 @@ int main(int argc, char **argv){
       	d += tmp_m[threadID*m+k]*w[s*n+nnIndx0[i+n0*k]]; 
       }
       
+#pragma omp atomic
+      zWIndx++;
+	
       //cout << sigmaSq[s] << "\t" << phi[s] << "\t" << d << endl;
-      w0[s*n0+i] = sqrt(sigmaSq[s] - ddot_(&m, &tmp_m[threadID*m], &inc, &c[threadID*m], &inc)) + d;
+      w0[s*n0+i] = sqrt(sigmaSq[s] - ddot_(&m, &tmp_m[threadID*m], &inc, &c[threadID*m], &inc))*wZ[zWIndx]  + d;
 
       #pragma omp atomic
       zYIndx++;
